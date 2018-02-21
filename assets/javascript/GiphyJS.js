@@ -26,12 +26,19 @@ var apiCall = function () {
         method: "GET"
     }).then(function (response) {
         console.log(response);
+        console.log(response.data.length);
+        var count=response.data.length;
         // starting to display received data(response).
         var giphyPlaceholder = $("#responseHolder-col");
         giphyPlaceholder.empty();
         var lblHeader = $("#headerHolder");
+        if(count>0){
         lblHeader.html(myKeyword.toUpperCase()); // header for the result same as button key
-        for (var i = 0; i < response.data.length; i++) {
+        }
+        else{
+            lblHeader.html("No Result for "+myKeyword.toUpperCase());
+        }
+        for (var i = 0; i < count; i++) {
             var imageTag = $("<img>");
             var ratingTag = $("<h4>");
             ratingTag.html("<code>Rating:</code><span class='badge'>" + response.data[i].rating + "</span>");
